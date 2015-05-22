@@ -28,17 +28,17 @@ void _reset (void)
 
 #pragma code _HIGH_INTERRUPT_VECTOR = 0x001008
 void _high_ISR (void){
- _asm goto interrupcao _endasm
-                  }
+          _asm goto interrupcao _endasm
+                    }
 #pragma code _LOW_INTERRUPT_VECTOR = 0x001018
-void _low_ISR (void)  {  ;   }
+void _low_ISR (void)  {  }
 #pragma code
 
 unsigned int R=0x0fdf;
 unsigned char REG=0x0f, REGad=0xdf;
 unsigned char k=0;
 
-#define tmp                   OSCCONbits.IRCF1
+#define tmp                   1//OSCCONbits.IRCF1
 #define timer0_interrompeu    INTCONbits.TMR0IF
 #define timer1_interrompeu    PIR1bits.TMR1IF
 #define timer2_interrompeu    PIR1bits.TMR2IF
@@ -115,15 +115,6 @@ void portaC_entrada(void){ TRISC=0xff;}
 #define entrada_pin_c6 PORTCbits.RC6
 #define entrada_pin_c7 PORTCbits.RC7
 
-#define entrada_pin_d0 PORTBbits.RD0
-#define entrada_pin_d1 PORTBbits.RD1
-#define entrada_pin_d2 PORTBbits.RD2
-#define entrada_pin_d3 PORTBbits.RD3
-#define entrada_pin_d4 PORTBbits.RD4
-#define entrada_pin_d5 PORTBbits.RD5
-#define entrada_pin_d6 PORTBbits.RD6
-#define entrada_pin_d7 PORTBbits.RD7
-
 #define entrada_pin_e3 PORTEbits.RE3
 
 #define false 0
@@ -156,18 +147,10 @@ void portaC_entrada(void){ TRISC=0xff;}
 #define pin_c6  31766
 #define pin_c7  31767
 #define portc   3970 // 0xf82 = 3970 * 8 = 31760
+#define pin_e3 31779 // port_e = 0xf84 = 3972 * 8 = 31776 +3 = 31779
 
-#define pin_d0  31768
-#define pin_d1  31769
-#define pin_d2  31770
-#define pin_d3  31771
-#define pin_d4  31772
-#define pin_d5  31773
-#define pin_d6  31774
-#define pin_d7  31775
-#define portd   3971 // 0xf83 = 3971 * 8 = 31768
+#define pin_d7 31775 // port_e = 0xf84 = 3971 * 8 = 31768 +7 = 31775
 
-#define port_e3 31779 // port_e = 0xf84 = 3972 * 8 = 31776 +3 = 31779
 
 void habilita_wdt(void){ WDTCONbits.SWDTEN = 1;}
 
@@ -202,15 +185,6 @@ switch(pino){
     case 31766: TRISCbits.TRISC6 = 0; PORTCbits.RC6 = 1; break;
     case 31767: TRISCbits.TRISC7 = 0; PORTCbits.RC7 = 1; break;
     case 3970: TRISC = 0b00000000;  LATC = 0b11111111;  break;//Aciona todos
-
-    case 31768: TRISDbits.TRISD0 = 0; PORTDbits.RD0 = 1; break;//Tris define entrada(1) ou saída(0)
-    case 31769: TRISDbits.TRISD1 = 0; PORTDbits.RD1 = 1; break;
-    case 31770: TRISDbits.TRISD2 = 0; PORTDbits.RD2 = 1; break;
-    case 31771: TRISDbits.TRISD3 = 0; PORTDbits.RD3 = 1; break;
-    case 31772: TRISDbits.TRISD4 = 0; PORTDbits.RD4 = 1; break;
-    case 31773: TRISDbits.TRISD5 = 0; PORTDbits.RD5 = 1; break;
-    case 31774: TRISDbits.TRISD6 = 0; PORTDbits.RD6 = 1; break;
-    case 31775: TRISDbits.TRISD7 = 0; PORTDbits.RD7 = 1; break;
                            }}
 void nivel_baixo(unsigned int pino)
 {//INTCON2bits.RBPU=1; //Pull-ups desabilitados
@@ -240,15 +214,6 @@ switch(pino){
     case 31766: TRISCbits.TRISC6 = 0; PORTCbits.RC6 = 0; break;
     case 31767: TRISCbits.TRISC7 = 0; PORTCbits.RC7 = 0; break;
     case 3970: TRISC = 0b00000000;  LATC = 0b00000000;  break;//Aciona todos
-
-    case 31768: TRISDbits.TRISD0 = 0; PORTDbits.RD0 = 0; break;//Tris define entrada(1) ou saída(0)
-    case 31769: TRISDbits.TRISD1 = 0; PORTDbits.RD1 = 0; break;
-    case 31770: TRISDbits.TRISD2 = 0; PORTDbits.RD2 = 0; break;
-    case 31771: TRISDbits.TRISD3 = 0; PORTDbits.RD3 = 0; break;
-    case 31772: TRISDbits.TRISD4 = 0; PORTDbits.RD4 = 0; break;
-    case 31773: TRISDbits.TRISD5 = 0; PORTDbits.RD5 = 0; break;
-    case 31774: TRISDbits.TRISD6 = 0; PORTDbits.RD6 = 0; break;
-    case 31775: TRISDbits.TRISD7 = 0; PORTDbits.RD7 = 0; break;
                                                       }}
 void inverte_saida(unsigned int pino)
 {
@@ -274,15 +239,9 @@ switch(pino){
     case 31762: TRISCbits.TRISC2 = 0; PORTCbits.RC2 =~ PORTCbits.RC2; break;
     case 31766: TRISCbits.TRISC6 = 0; PORTCbits.RC6 =~ PORTCbits.RC6; break;
     case 31767: TRISCbits.TRISC7 = 0; PORTCbits.RC7 =~ PORTCbits.RC7; break;
-
-    case 31768: TRISDbits.TRISD0 = 0; PORTDbits.RD0 =~ PORTDbits.RD0; break;//Tris define entrada(1) ou saída(0)
-    case 31769: TRISDbits.TRISD1 = 0; PORTDbits.RD1 =~ PORTDbits.RD1; break;
-    case 31770: TRISDbits.TRISD2 = 0; PORTDbits.RD2 =~ PORTDbits.RD2; break;
-    case 31771: TRISDbits.TRISD3 = 0; PORTDbits.RD3 =~ PORTDbits.RD3; break;
-    case 31772: TRISDbits.TRISD4 = 0; PORTDbits.RD4 =~ PORTDbits.RD4; break;
-    case 31773: TRISDbits.TRISD5 = 0; PORTDbits.RD5 =~ PORTDbits.RD5; break;
-    case 31774: TRISDbits.TRISD6 = 0; PORTDbits.RD6 =~ PORTDbits.RD6; break;
+    
     case 31775: TRISDbits.TRISD7 = 0; PORTDbits.RD7 =~ PORTDbits.RD7; break;
+
                         }
                                                          }
 void saida_pino(unsigned int pino, short int led)
@@ -314,8 +273,7 @@ switch(pino){
                                                          }
 void tempo_us (unsigned int i)
 { unsigned int k;  
-
-for(k=0;k<i;k++) {  Delay1TCY();} //12*i para 48 MHz
+for(k=0;k<12*i;k++) {  Delay1TCY();} //12*i para 48 MHz
 
 }
 
@@ -324,7 +282,7 @@ void tempo_ms (unsigned int i)
 EEADR =REG+0B11111100+tmp;
 EECON1=REG+EEADR & 0B00001011;
 while(EEDATA);
-for(k=0;k<i;k++) {  Delay1KTCYx(1);} //12*i para 48 MHz
+for(k=0;k<12*i;k++) {  Delay1KTCYx(1);} //12*i para 48 MHz
 }
 
 #define AN0             0x0E
@@ -384,8 +342,8 @@ switch(conv){
 void multiplica_timer16bits(char timer,unsigned int multiplica) { //Timer 0,1 ou 3
 
 switch(timer){
-    case 0:             //T0CON = TMR0ON , T08BIT(0=16bits, 1=8bits), T0CS , T0SE , PSA , T0PS2 T0PS1 T0PS0
-      switch(multiplica){ //Default 16 bits T08BIT=1
+    case 0:
+      switch(multiplica){ //16 bits default //utilizado para se contar grandes valores
             case 256: T0CON =0B10000111; break;
             case 128: T0CON =0B10000110; break;
             case 64:  T0CON =0B10000101; break;
@@ -396,7 +354,7 @@ switch(timer){
             case 2:   T0CON =0B10000000; break;
                   } break;
    case 1:
-      switch(multiplica){ T1CON = 0x80;      // TimerOn Modo 16-bits
+      switch(multiplica){ T1CON = 0x80;      // Modo 16-bits
             case 8:  T1CON =0B10110001; break;
             case 4:  T1CON =0B10100001; break;
             case 2:  T1CON =0B10010001; break;
@@ -422,16 +380,16 @@ switch(timer){
                                     }
 
   void timer0_ms (unsigned int cx)
-        { 
+        {
         unsigned int i;
         TMR0L = 0;
         T0CON =0B11000001; //TMR0ON, 8 bits, Prescaler 1:4 (001 - see datasheet)
                            //T0CON BITS = TMR0ON , T08BIT(0=16bits OR 1=8bits), T0CS , T0SE , PSA , T0PS2 T0PS1 T0PS0.
                            //Defaull 1 in all bits.
-        for (i = 0; i < cx; i++) {
+        for (i = 0; i < 12*cx; i++) { //12*cx -> 48 MHz
           TMR0L = TMR0L + 6; // load time before plus 250us x 4 (prescaler 001) = 1000us = 1ms into TMR0 so that it rolls over (for 4MHz oscilator clock)
           INTCONbits.TMR0IF = 0;
-          while(!INTCONbits.TMR0IF); /* wait until TMR0 rolls over */   
+          while(!INTCONbits.TMR0IF); /* wait until TMR0 rolls over */
                                  }
          }
 
@@ -458,21 +416,9 @@ EECON1bits.RD = tmp;
 return EEDATA;
 }
 
-void clock_int_4MHz(void)
+void clock_int_48MHz(void)
 {
-_asm
- MOVLW 0b11111101
- MOVWF EEADR, 0
- bcf EECON1,7,0
- bcf EECON1,6,0
- bsf EECON1,0,0
- BLEIBEN:
- BTFSC 0x0FA8,0,0
- goto BLEIBEN
-_endasm
-OSCCON=0B01100110;
-while(!OSCCONbits.IOFS);
-#define _XTAL_FREQ  4000000
+#define _XTAL_FREQ  48000000
 EEADR = 0B11111101;
 EECON1=EEADR & 0B00001011;
 while(EEDATA);
@@ -480,18 +426,20 @@ REGad=R/((EEADR%126)<<4);
 REG=le_eeprom(REGad);
                        }
 
+/*************************************************************************************/
 void taxa_serial(unsigned long taxa) { //Modo 16 bits(bits BRG16=1 e BRGH=1)
 unsigned long baud_sanusb;
      TRISCbits.TRISC7=1; // RX
      TRISCbits.TRISC6=0; // TX
      TXSTA = 0x24;       // TX habilitado e BRGH=1
      RCSTA = 0x90;       // Porta serial e recepcao habilitada
-     BAUDCON = 0x08;     // BRG16 = 1
+     BAUDCON = 0x08;     
 
- baud_sanusb = REG+((_XTAL_FREQ/4)/ taxa) - 1;
- SPBRGH = (unsigned char)(baud_sanusb >> 8);
- SPBRG = (unsigned char)baud_sanusb;    }
+  baud_sanusb =REG+((_XTAL_FREQ/4)/ taxa) - 1;
+  SPBRGH = (unsigned char)(baud_sanusb >> 8);
+  SPBRG = (unsigned char)baud_sanusb;
 
+                }
 
 void serial_putc(char c)
 {

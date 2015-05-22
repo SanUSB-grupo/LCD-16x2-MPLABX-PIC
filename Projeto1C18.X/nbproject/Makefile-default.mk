@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=ADserialPWM.c
+SOURCEFILES_QUOTED_IF_SPACED=ExemploLCD.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ADserialPWM.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/ADserialPWM.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ExemploLCD.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ExemploLCD.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/ADserialPWM.o
+OBJECTFILES=${OBJECTDIR}/ExemploLCD.o
 
 # Source Files
-SOURCEFILES=ADserialPWM.c
+SOURCEFILES=ExemploLCD.c
 
 
 CFLAGS=
@@ -86,22 +86,22 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/ADserialPWM.o: ADserialPWM.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/ExemploLCD.o: ExemploLCD.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/ADserialPWM.o.d 
-	@${RM} ${OBJECTDIR}/ADserialPWM.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION) -ms -oa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/ADserialPWM.o   ADserialPWM.c 
-	@${DEP_GEN} -d ${OBJECTDIR}/ADserialPWM.o 
-	@${FIXDEPS} "${OBJECTDIR}/ADserialPWM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	@${RM} ${OBJECTDIR}/ExemploLCD.o.d 
+	@${RM} ${OBJECTDIR}/ExemploLCD.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -D__DEBUG -D__MPLAB_DEBUGGER_PICKIT2=1 -p$(MP_PROCESSOR_OPTION) -ms -oa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/ExemploLCD.o   ExemploLCD.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/ExemploLCD.o 
+	@${FIXDEPS} "${OBJECTDIR}/ExemploLCD.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 else
-${OBJECTDIR}/ADserialPWM.o: ADserialPWM.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/ExemploLCD.o: ExemploLCD.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} ${OBJECTDIR} 
-	@${RM} ${OBJECTDIR}/ADserialPWM.o.d 
-	@${RM} ${OBJECTDIR}/ADserialPWM.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -ms -oa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/ADserialPWM.o   ADserialPWM.c 
-	@${DEP_GEN} -d ${OBJECTDIR}/ADserialPWM.o 
-	@${FIXDEPS} "${OBJECTDIR}/ADserialPWM.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
+	@${RM} ${OBJECTDIR}/ExemploLCD.o.d 
+	@${RM} ${OBJECTDIR}/ExemploLCD.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -p$(MP_PROCESSOR_OPTION) -ms -oa-  -I ${MP_CC_DIR}\\..\\h  -fo ${OBJECTDIR}/ExemploLCD.o   ExemploLCD.c 
+	@${DEP_GEN} -d ${OBJECTDIR}/ExemploLCD.o 
+	@${FIXDEPS} "${OBJECTDIR}/ExemploLCD.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c18 
 	
 endif
 
